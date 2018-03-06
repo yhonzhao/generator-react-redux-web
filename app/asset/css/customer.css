@@ -1,0 +1,68 @@
+.btn_search {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    border: none;
+    font-weight: blod;
+    font-size: larger;
+    height: 40px;
+    width: 104px;
+    border-radius: unset;
+    cursor: pointer;
+    outline: none;
+    background: #E3E3E3
+}
+
+.btn_search:hover {
+    outline: none;
+}
+
+.input_home {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    border-radius: unset;
+    font-weight: blod;
+    font-size: larger;
+    border: none;
+    height: 40px;
+    width: 450px;
+}
+
+.input_search {
+    margin-left: 10px;
+    border-radius: unset;
+    font-weight: blod;
+    font-size: larger;
+    border: 1px solid rgb(201, 201, 201);
+    height: 35px ;
+    width: 439px ;
+    outline: none;
+    text-indent: 8px;
+}
+
+.input_search:hover {
+    outline: none ;
+    border-color: #2285F7
+}
+
+
+.btn_search_s {
+    border: 1px solid #2285F7;
+    font-weight: blod;
+    font-size: larger;
+    height: 35px;
+    width: 100px;
+    border-radius: unset;
+    cursor: pointer;
+    outline: none;
+    color: #FFF;
+    background: #2285F7;
+    outline: none;
+    margin-left: -1px;
+}
+
+.btn_search_s:hover {
+    outline: none;
+    background: rgb(19, 125, 247);
+}
+
+.ant-menu-item {
+    height: 40px !important
+}
