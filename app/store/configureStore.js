@@ -1,10 +1,9 @@
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
-import { routerMiddleware } from 'react-router-redux';
-import createHistory from 'history/createBrowserHistory';
 import api from '../middleware/api';
 import rootReducer from '../reducers';
-import {BASENAME} from '../constants/index'
+import { routerMiddleware } from 'react-router-redux'
+import { browserHistory } from 'react-router'
 
 const middlewares = [];
 if (process.env.NODE_ENV === `development`) {
@@ -12,15 +11,10 @@ if (process.env.NODE_ENV === `development`) {
     middlewares.push(logger);
 }
 
-export const history = createHistory({
-    basename: BASENAME
-})
-
-const middleware = routerMiddleware(history)
-middlewares.push(middleware)
+const history = routerMiddleware(browserHistory)
 
 const finalCreateStore = compose(
-    applyMiddleware(thunk,api),
+    applyMiddleware(thunk,api,history),
     applyMiddleware(...middlewares),
 )(createStore);
 

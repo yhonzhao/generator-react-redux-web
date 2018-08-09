@@ -8,18 +8,19 @@ module.exports = {
         './app/index'
     ],
     output: {
-        path: path.join(__dirname, 'static'),
+        path: path.join(__dirname,"./static"),
         filename: 'bundle.js',
         publicPath: '/static/'
     },
     devServer: {
-        contentBase: './static',
+        contentBase: '/static',
         hot: true
     },
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new webpack.DefinePlugin({
             'process.env': { NODE_ENV: JSON.stringify('development') },
             DEV: true,
@@ -30,7 +31,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 loader: "babel-loader",
                 exclude: /node_modules/,
                 include: __dirname

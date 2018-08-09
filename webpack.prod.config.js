@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
     devtool: false,
@@ -8,27 +7,32 @@ module.exports = {
         './app/index'
     ],
     output: {
-        path: path.join(__dirname, 'static'),
+        path: path.join(__dirname, './static'),
         filename: 'bundle.js',
         publicPath: '/static/'
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({compress: {
-            warnings: false,
-            drop_console: true
-        },}),
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            comments: false,
+            compress: {
+                warnings: false,
+                drop_console: true,
+                pure_funcs: ['console.log']
+            },
+        }),
         new webpack.DefinePlugin({
             'process.env': { NODE_ENV: JSON.stringify('production') },
-            DEV:false,
-            PROD:true,
-            TEST:false
+            DEV: false,
+            PROD: true,
+            TEST: false
         })
     ],
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 loader: "babel-loader",
                 exclude: /node_modules/,
                 include: __dirname
@@ -45,9 +49,14 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [ 'style-loader', 'css-loader' ]
+                use: ['style-loader', 'css-loader']
             }
         ]
+    },
+    node: {
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty',
     }
 }
 
